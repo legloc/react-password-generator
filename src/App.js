@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import generator from 'generate-password'
+import copy from 'copy-to-clipboard'
 
 import Output from './components/Output'
 import Range from './components/Range'
@@ -15,7 +17,19 @@ const App = () => {
   const [numbersOption, setNumbersOption] = useState(false)
 
   const handleSubmit = () => {
-    console.log('Handle Button click')
+    let isSelected
+    if (!uppercaseOption && !lowercaseOption && !symbolsOption && !numbersOption)
+      isSelected = false
+    else
+      isSelected = true
+
+    setPassword(generator.generate({
+      length: length,
+      uppercase: isSelected ? uppercaseOption : true,
+      lowercase: isSelected ? lowercaseOption : true,
+      symbols: isSelected ? symbolsOption : true,
+      numbers: isSelected ? numbersOption : true
+    }))
   }
 
   return (
@@ -25,7 +39,7 @@ const App = () => {
           <div className="card">
             <div className="card-body">
               <h4 className="card-title fw-bold text-center">Password Generator</h4>
-              <Output title={ password } onClick={ () => console.log('Handle Input click') } />
+              <Output title={ password } onClick={ () => copy(password) } />
               <Range title="Length" min="4" max="32" onChange={ val => setLength(parseInt(val)) } />
               <Option title="Include Uppercase" onChange={ () => setUppercaseOption(!uppercaseOption) } />
               <Option title="Include Lowercase" onChange={ () => setLowercaseOption(!lowercaseOption) } />
