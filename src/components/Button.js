@@ -1,6 +1,6 @@
-const Button = () => (
-  <button className="btn w-100 btn-primary">
-    GENERATE PASSWORD
+const Button = ({ title, onClick }) => (
+  <button className="btn w-100 btn-primary" onClick={ onClick }>
+    { title }
   </button>
 )
 

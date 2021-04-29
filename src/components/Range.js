@@ -1,10 +1,17 @@
-const Range = () => (
+const Range = ({ title, min, max, onChange }) => (
   <div className="range-wrapper mb-2">
-    <span>Length: <span className="fw-bold">32</span></span>
+    <span>{ title }: <span className="fw-bold">32</span></span>
     <div className="d-flex align-items-center">
-      <span>4</span>
-      <input className="form-range mx-2" type="range" id="customRange" min="4" max="32" />
-      <span>32</span>
+      <span>{ min }</span>
+      <input 
+        className="form-range mx-2"
+        type="range"
+        min={ min }
+        max={ max }
+        defaultValue={ min }
+        onTouchEnd={ e => onChange(e.target.value) }
+        onMouseUp={ e => onChange(e.target.value) } />
+      <span>{ max }</span>
     </div>
   </div>
 )

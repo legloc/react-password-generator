@@ -1,6 +1,6 @@
-const Output = () => (
-  <div className="mb-3">
-    <input className="form-control pointer" type="text" value="CLICK GENERATE" disabled />
+const Output = ({ title, onClick}) => (  
+  <div className="mb-2">
+    <input className="form-control pointer" type="text" value={ title } onClick={ onClick } readOnly />
     <small className="d-block text-muted text-center">Click to copy</small>
   </div>
 )
